@@ -99,4 +99,24 @@ class MediaController extends AbstractController
 
         return new JsonResponse(["code"=>$code, "message"=>$message,"data"=>$data],$http);
     }
+
+    /**
+     * @Route("/get/{id}", name="get_by_id")
+     */
+    public function get_by_id(MediaRepository $mediaRepository,$id=null): JsonResponse
+    {
+            $media = $mediaRepository->find(['id' => $id]);
+            if (empty($media)) {
+                $code = 400;
+                $message = "Aucun Résultat";
+                $http = Response::HTTP_BAD_REQUEST;
+                return new JsonResponse(["message"=>$message,"code"=>$code],$http);
+            } else {
+                $data=["id" => $media->getId(), "Nom" => $media->getName(), "Synopsis" => $media->getSynopsis(), "Type" => $media->getType(), "created_at" => $media->getCreatedAt()];
+                $code = 200;
+                $message = "ok";
+                $http = Response::HTTP_OK;
+                return new JsonResponse(["message"=>$message,"code"=>$code,"data"=>$data],$http);
+            }
+    }
 }
