@@ -74,4 +74,29 @@ class MediaController extends AbstractController
 
         return new JsonResponse(["code"=>$code,"message"=>$message, "data"=>$data],$http);
     }
+
+    /**
+     * @Route("/getall", name="get_all")
+     */
+    public function get_all(MediaRepository $mediaRepository): JsonResponse
+    {
+        $medias=$mediaRepository->findAll();
+        $data=array();
+
+        if(empty($medias)){
+            $code=400;
+            $message="Aucun Media trouvé";
+            $http=Response::HTTP_BAD_REQUEST;
+        }else{
+            foreach ($medias as $media){
+                array_push($data,["id"=>$media->getId(),"Nom"=>$media->getName(),"Synopsis"=>$media->getSynopsis(),"Type"=>$media->getType(),"created_at"=>$media->getCreatedAt()]);
+            }
+            $code=200;
+            $message = "Liste de tout nos medias";
+            $http=Response::HTTP_OK;
+        }
+
+
+        return new JsonResponse(["code"=>$code, "message"=>$message,"data"=>$data],$http);
+    }
 }
