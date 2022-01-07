@@ -9,13 +9,31 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Netfleet</h1>
+    <h1 class="title">Netfleet</h1>
+    <div class="is-flex is-flex-direction-row is-flex-wrap-wrap	is-justify-content-space-between">
 
     {% for media in medias %}
-        <p>{{ media.name }}</p>
-        <p>{{ media.type }}</p>
-        <p>{{ media.Synopsis }}</p>
-        <hr>
+            <div class="card" style="width: 30%; margin-top: 3rem;">
+                <div class="card-image">
+                    <figure class="image is-square">
+                        <img src="https://via.placeholder.com/240?text=TBA" alt="Placeholder image">
+                    </figure>
+                </div>
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4">{{ media.name }}</p>
+                        </div>
+                    </div>
+
+                    <div class="content">
+                        <p>{{ media.type }}</p>
+                        <p>{{ media.synopsis }}</p>
+                    </div>
+                </div>
+            </div>
     {% endfor %}
+    </div>
+
 </div>
 {% endblock %}
