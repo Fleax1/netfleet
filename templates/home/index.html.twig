@@ -14,11 +14,13 @@
 
     {% for media in medias %}
             <div class="card" style="width: 30%; margin-top: 3rem;">
-                <div class="card-image">
-                    <figure class="image is-square">
-                        <img src="https://via.placeholder.com/240?text=TBA" alt="Placeholder image">
-                    </figure>
-                </div>
+                {% if media.imageurl is not empty %}
+                    <div class="card-image">
+                        <figure class="image">
+                            <img src="{{ media.imageurl }}" alt="Placeholder image">
+                        </figure>
+                    </div>
+                {% endif %}
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content">

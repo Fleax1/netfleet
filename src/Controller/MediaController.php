@@ -24,8 +24,9 @@ class MediaController extends AbstractController
         $name=htmlspecialchars(trim($data["name"]));
         $synopsis=htmlspecialchars(trim($data["synopsis"]));
         $type=htmlspecialchars(trim($data["type"]));
+        $image_url=htmlspecialchars(trim($data["image_url"]));
 
-        if (!empty($name) && !empty($synopsis) && !empty($type)) {
+        if (!empty($name) && !empty($synopsis) && !empty($type) && !empty($image_url)) {
 
             if ($type === "film" || $type === "serie") {
 
@@ -43,6 +44,7 @@ class MediaController extends AbstractController
                         $media->setName($name);
                         $media->setSynopsis($synopsis);
                         $media->setType($type);
+                        $media->setImageUrl($image_url);
                         $media->setCreatedAt(new \DateTimeImmutable());
                         $entityManager->persist($media);
                         $entityManager->flush();
@@ -89,7 +91,7 @@ class MediaController extends AbstractController
             $http=Response::HTTP_BAD_REQUEST;
         }else{
             foreach ($medias as $media){
-                array_push($data,["id"=>$media->getId(),"Nom"=>$media->getName(),"Synopsis"=>$media->getSynopsis(),"Type"=>$media->getType(),"created_at"=>$media->getCreatedAt()]);
+                array_push($data,["id"=>$media->getId(),"Nom"=>$media->getName(),"Synopsis"=>$media->getSynopsis(),"image_url"=>$media->getImageUrl(),"Type"=>$media->getType(),"created_at"=>$media->getCreatedAt()]);
             }
             $code=200;
             $message = "Liste de tout nos medias";
@@ -112,7 +114,7 @@ class MediaController extends AbstractController
                 $http = Response::HTTP_BAD_REQUEST;
                 return new JsonResponse(["message"=>$message,"code"=>$code],$http);
             } else {
-                $data=["id" => $media->getId(), "Nom" => $media->getName(), "Synopsis" => $media->getSynopsis(), "Type" => $media->getType(), "created_at" => $media->getCreatedAt()];
+                $data=["id" => $media->getId(), "Nom" => $media->getName(), "Synopsis" => $media->getSynopsis(), "image_url" => $media->getImageUrl(),"Type" => $media->getType(), "created_at" => $media->getCreatedAt()];
                 $code = 200;
                 $message = "ok";
                 $http = Response::HTTP_OK;

@@ -37,6 +37,11 @@ class Media
      */
     private $created_at;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageurl;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Media
     public function setCreatedAt(\DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageurl;
+    }
+
+    public function setImageUrl(?string $imageurl): self
+    {
+        $this->imageurl = $imageurl;
 
         return $this;
     }
