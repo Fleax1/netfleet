@@ -11,6 +11,11 @@
 <div class="example-wrapper">
     <h1>Netfleet</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa hic illum quam quas temporibus. Blanditiis deleniti ex odit voluptatum. Blanditiis, dolores eius magni nostrum tempora voluptate. Architecto atque cupiditate magnam.</p>
+    {% for media in medias %}
+        <p>{{ media.name }}</p>
+        <p>{{ media.type }}</p>
+        <p>{{ media.Synopsis }}</p>
+        <hr>
+    {% endfor %}
 </div>
 {% endblock %}
